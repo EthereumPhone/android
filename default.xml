@@ -7,6 +7,9 @@
 
   <remote  name="private"
            fetch="ssh://git@github.com" />
+           
+  <remote  name="ethGit" 
+           fetch="https://github.com/EthereumPhone" />
 
   <remote  name="aosp"
            fetch="https://android.googlesource.com"
