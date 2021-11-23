@@ -1,10 +1,10 @@
-LineageOS
+ethOS
 ===========
 
 Getting started
 ---------------
 
-To get started with Android/LineageOS, you'll need to get familiar with [Source Control Tools](https://source.android.com/setup/develop).
+To get started with Android/ethOS, you'll need to get familiar with [Source Control Tools](https://source.android.com/setup/develop).
 
 To initialize your local repository using the LineageOS trees, use a command like this:
 ```
