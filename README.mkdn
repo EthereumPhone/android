@@ -8,7 +8,7 @@ To get started with Android/ethOS, you'll need to get familiar with [Source Cont
 
 To initialize your local repository using the LineageOS trees, use a command like this:
 ```
-repo init -u git://github.com/EthereumPhone/android.git -b ethOS
+repo init -u git://github.com/EthereumPhone/android.git -b ethOSTest
 ```
 Then to sync up:
 ```
