@@ -25,12 +25,52 @@ Simply follow our guide on [how to submit patches](https://wiki.lineageos.org/su
 
 To view the status of your and others' patches, visit [LineageOS Gerrit Code Review](https://review.lineageos.org/).
 
+# Build Info
 
-Buildbot
---------
+This is just a small how-to on building and flashing ethOS.
 
-All supported devices are built weekly and periodically as changes are committed to ensure the source trees remain buildable.
+## System requirements for a build
 
-You can view the current build statuses at [LineageOS Buildkite](https://buildkite.com/lineageos).
+To build EthOs you need to fulfill the following system requirements:
 
-Builds produced weekly by the buildbot can be downloaded from [LineageOS downloads](https://download.lineageos.org/).
++ 250 GB for the source code
++ Additional 150GB to build it (If you conduct multiple builds, you need additional space.)
++ At least 16 GB of available RAM is required, but Google recommends 64 GB.
+
+Also, your system needs to run on Ubuntu 20.04 or 18.04.
+
+At the end of the day, the faster the machine, the faster the build. Google uses 72 core machines internally, and their build times are 40 min. So it will probably take much longer on slower machines.
+
+## Getting the source-code
+
+To download the source you need to install `git-repo`. To install git-repo just open up the Terminal and type `sudo apt install repo`.
+
+Once you have the tool installed, create a working-directory where you will store the source. You can do this with the command `mkdir WORKING_DIR`, then enter the created directory using `cd WORKING_DIR`.
+
+You can initialize the repo-tool with the following command: `repo init -u git://github.com/EthereumPhone/android.git -b ethOSTest`. It basically points the repo-tool to the default.xml file in the above given git repo. The branch we choose is the ethOSTest branch, where the current commit for the system-service is located.
+
+The above command will only initialize repo, it will not yet download anything. To download the source you just need to type this into `the` command-line: `repo sync`. Depending on your connection speed this can take a very long time.
+
+## Compiling the code
+
+First, to setup the development environment you need to source the envsetup bash-script using this command: `source build/envsetup.sh`. Once thats done, you can already enter the command `hmm`, and it will output a help page with all the available commands.
+
+Then, we need to pick a build-type. For this we will use the `lunch` command. For Pixel devices it works like this: 
+
+`lunch aosp_XXX-userdebug`. Replace XXX with the name of the Pixel. For example, to build and flash for a Pixel 2 you need to enter this command: `lunch aosp_walleye-userdebug`. The device names (for pixel) can be seen here:  https://developers.google.com/android/images#oriole
+
+Now, to compile it just input the command `m`. This will probably take a long time.
+
+## Flash the device
+
+To flash your device, you first need to connect your phone and enable USB-Debugging. You can enable USB-Debugging by going into "Settings"/"System"/"Advanced"/"Developer options"/"USB debugging". Sometimes you need to enable the Developer-mode to access this setting. This can be activated by pressing multiple times on the "Buildnumber".
+
+ Once this is done, you can flash it onto the phone.
+
+Using `adb devices` you can list the connected devices. This should show your device.
+
+To reboot into fastboot use `adb reboot bootloader`. Once this succeeds, you can also list you device using `fastboot devices`.
+
+After that, you need to unlock the phone to be flashable: `fastboot flashing unlock`. Once you pressed enter, you will need to follow the instructions on the phone. Select "unlock bootloader" using the volume buttons, and confirm with the power button.
+
+Once this is done, just enter `fastboot flashall -w`. After a few reboots, you should have a running version of ethOS on your phone.
