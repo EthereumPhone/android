@@ -35,7 +35,7 @@ To build EthOs you need to fulfill the following system requirements:
 
 + 250 GB for the source code
 + Additional 150GB to build it (If you conduct multiple builds, you need additional space.)
-+ At least 16 GB of available RAM is required, but Google recommends 64 GB.
++ At least 24 GB of available RAM is required, but Google recommends 64 GB.
 
 Also, your system needs to run on Ubuntu 20.04 or 18.04.
 
@@ -47,30 +47,25 @@ To download the source you need to install `git-repo`. To install git-repo just 
 
 Once you have the tool installed, create a working-directory where you will store the source. You can do this with the command `mkdir WORKING_DIR`, then enter the created directory using `cd WORKING_DIR`.
 
-You can initialize the repo-tool with the following command: `repo init -u git://github.com/EthereumPhone/android.git -b ethOSTest`. It basically points the repo-tool to the default.xml file in the above given git repo. The branch we choose is the ethOSTest branch, where the current commit for the system-service is located.
+You can initialize the repo-tool with the following command: `repo init -u git://github.com/EthereumPhone/android.git -b ethOSTest`. It basically points the repo-tool to the default.xml file in the above given git repo. The branch we choose is the ethOS branch, where the current commit for the system-service is located.
 
-The above command will only initialize repo, it will not yet download anything. To download the source you just need to type this into the command-line: `repo sync`. Depending on your connection speed this can take a very long time.
+The above command will only initialize repo, it will not yet download anything. To download the source you just need to type this into `the` command-line: `repo sync`. Depending on your connection speed this can take a very long time.
 
 ## Compiling the code
 
-First, to setup the development environment you need to source the envsetup bash-script using this command: `source build/envsetup.sh`. Once thats done, you can already enter the command `hmm`, and it will output a help page with all the available commands.
+First setup the environment by running `source build/envsetup.sh`. 
 
-Then, we need to pick a build-type. For this we will use the `lunch` command. For Pixel devices it works like this: 
+After that we need to tell AOSP what device we are building for by doing this: `breakfast XXX`. Replace XXX with the name of the Pixel. For example, to build and flash for a Pixel 2 you need to enter this command: `lunch aosp_walleye-userdebug`. The device names (for pixel) can be seen here:  https://developers.google.com/android/images#oriole
 
-`lunch aosp_XXX-userdebug`. Replace XXX with the name of the Pixel. For example, to build and flash for a Pixel 2 you need to enter this command: `lunch aosp_walleye-userdebug`. The device names (for pixel) can be seen here:  https://developers.google.com/android/images#oriole
+Note: When you run the breakfast command you need a device which is already flashed with lineageos, also turn on USB-Debugging and Rooted Debugging enabled. If you need any help setting this up, or you encouter some weird error, you can always message me on the discord. My at is `@mhaas.eth`
 
-Now, to compile it just input the command `m`. This will probably take a long time.
+Now, to compile it just input the command `breakfast blueline`. This will probably take a long time.
 
 ## Flash the device
 
-To flash your device, you first need to connect your phone and enable USB-Debugging. You can enable USB-Debugging by going into "Settings"/"System"/"Advanced"/"Developer options"/"USB debugging". Sometimes you need to enable the Developer-mode to access this setting. This can be activated by pressing multiple times on the "Buildnumber".
+At the end of the compile it will output a path to a zip-file. This zip-file contains ethOS. 
 
- Once this is done, you can flash it onto the phone.
+Now, plug you phone into your PC and enter the command `adb reboot bootloader`, this will put the device into the bootloader. Once you are in the bootloader, enter into recovery mode. Then press `Apply Update` and then `From ADB`. 
 
-Using `adb devices` you can list the connected devices. This should show your device.
+On your PC you will now execute the following command: `adb sideload XXX` and replace XXX with the file path of the zip-file. Once you press enter it will start to flash ethOS on your phone. Note: It may stop at 47% and read "failure to read: success", this is still fine. Now press "Reboot" and you have ethOS installed!
 
-To reboot into fastboot use `adb reboot bootloader`. Once this succeeds, you can also list you device using `fastboot devices`.
-
-After that, you need to unlock the phone to be flashable: `fastboot flashing unlock`. Once you pressed enter, you will need to follow the instructions on the phone. Select "unlock bootloader" using the volume buttons, and confirm with the power button.
-
-Once this is done, just enter `fastboot flashall -w`. After a few reboots, you should have a running version of ethOS on your phone.
