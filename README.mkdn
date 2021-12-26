@@ -55,11 +55,11 @@ The above command will only initialize repo, it will not yet download anything. 
 
 First setup the environment by running `source build/envsetup.sh`. 
 
-After that we need to tell AOSP what device we are building for by doing this: `breakfast XXX`. Replace XXX with the name of the Pixel. For example, to build and flash for a Pixel 2 you need to enter this command: `lunch aosp_walleye-userdebug`. The device names (for pixel) can be seen here:  https://developers.google.com/android/images#oriole
+After that we need to tell AOSP what device we are building for by doing this: `breakfast XXX`. Replace XXX with the name of the Pixel. For example, to build and flash for a Pixel 2 you need to enter this command: `breakfast walleye`. The device names (for pixel) can be seen here:  https://developers.google.com/android/images#oriole
 
 Note: When you run the breakfast command you need a device which is already flashed with lineageos, also turn on USB-Debugging and Rooted Debugging enabled. If you need any help setting this up, or you encouter some weird error, you can always message me on the discord. My at is `@mhaas.eth`
 
-Now, to compile it just input the command `breakfast blueline`. This will probably take a long time.
+Now, to compile it just input the command `brunch blueline`. This will probably take a long time.
 
 ## Flash the device
 
