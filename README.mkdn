@@ -63,9 +63,24 @@ Now, to compile it just input the command `brunch blueline`. This will probably 
 
 ## Flash the device
 
+If any errors occur, or you have questions, you can message me on the discord. Make sure to tag me `@mhaas.eth`
+
+### Flash bootloader
+
+Note: If you already have LineageOS or ethOS installed skip this step.
+
+1. Connect your device to the PC
+2. Now execute the command `adb reboot bootloader`
+3. Now unlock the bootloader using: `fastboot flashing unlock`
+4. Now flash the boot.img using `fastboot flash boot boot.img`
+
+### Install OS
+
 At the end of the compile it will output a path to a zip-file. This zip-file contains ethOS. 
 
-Now, plug you phone into your PC and enter the command `adb reboot bootloader`, this will put the device into the bootloader. Once you are in the bootloader, enter into recovery mode. Then press `Apply Update` and then `From ADB`. 
+Now, plug you phone into your PC and enter the command `adb reboot recovery`, this will put the device into the recovery mode . Then press `Apply Update` and then `From ADB`. 
 
-On your PC you will now execute the following command: `adb sideload XXX` and replace XXX with the file path of the zip-file. Once you press enter it will start to flash ethOS on your phone. Note: It may stop at 47% and read "failure to read: success", this is still fine. Now press "Reboot" and you have ethOS installed!
+On your PC you will now execute the following command: `adb sideload XXX` and replace XXX with the file path of the zip-file. Once you press enter it will start to flash ethOS on your phone. 
+
+Note: It may stop at 47% and read "failure to read: success", this is still fine. Now press "Reboot" and you have ethOS installed!
 
