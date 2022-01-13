@@ -74,6 +74,7 @@ Enable USB-Debugging:
 2. Go to System -> Developer Settings -> Toggle USB-Debugging
 3. Now, once you connect your Device to your PC, you should enable it for your Computer.
 
+Flash bootloader:
 1. Connect your device to the PC
 2. Now execute the command `adb reboot bootloader`
 3. Now unlock the bootloader using: `fastboot flashing unlock`
