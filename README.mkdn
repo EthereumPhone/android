@@ -69,6 +69,11 @@ If any errors occur, or you have questions, you can message me on the discord. M
 
 Note: If you already have LineageOS or ethOS installed skip this step.
 
+Enable USB-Debugging:
+1. Enable Developer Settings (Go to "About Phone" -> Press "Build-Number" a few times till it is active)
+2. Go to System -> Developer Settings -> Toggle USB-Debugging
+3. Now, once you connect your Device to your PC, you should enable it for your Computer.
+
 1. Connect your device to the PC
 2. Now execute the command `adb reboot bootloader`
 3. Now unlock the bootloader using: `fastboot flashing unlock`
