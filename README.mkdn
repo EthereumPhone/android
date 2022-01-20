@@ -67,7 +67,15 @@ If any errors occur, or you have questions, you can message me on the discord. M
 
 ### Flash bootloader
 
+#### Windows
+
+If you are not on windows you can skip to "Enable USB-Debugging".
+
+Install the driver that is needed on windows using this tutorial: https://developer.android.com/studio/run/win-usb
+
 Note: If you already have LineageOS or ethOS installed skip this step.
+
+If you want, you can follow this tutorial to unlock the bootloader on a Pixel device [here](https://www.youtube.com/watch?v=3PmevoXi0zI).
 
 Enable USB-Debugging:
 1. Enable Developer Settings (Go to "About Phone" -> Press "Build-Number" a few times till it is active)
