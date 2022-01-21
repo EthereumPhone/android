@@ -92,9 +92,15 @@ Flash bootloader:
 
 At the end of the compile it will output a path to a zip-file. This zip-file contains ethOS. 
 
-Now, plug you phone into your PC and enter the command `adb reboot recovery`, this will put the device into the recovery mode . Then press `Apply Update` and then `From ADB`. 
+You need to delete all your user-data, so make a backup of it if you want to keep it.
+
+Now, plug you phone into your PC and enter the command `adb reboot recovery`, this will put the device into the recovery mode.
+
+Then press Format Data, this will delete all your personal data.
 
 On your PC you will now execute the following command: `adb sideload XXX` and replace XXX with the file path of the zip-file. Once you press enter it will start to flash ethOS on your phone. 
 
-Note: It may stop at 47% and read "failure to read: success", this is still fine. Now press "Reboot" and you have ethOS installed!
+Once its finished, press Format Data again. Now press "Reboot" and you have ethOS installed!
+
+Note: It may stop at 47% and read "failure to read: success", this is still fine. 
 
