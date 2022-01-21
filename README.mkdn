@@ -96,7 +96,7 @@ You need to delete all your user-data, so make a backup of it if you want to kee
 
 Now, plug you phone into your PC and enter the command `adb reboot recovery`, this will put the device into the recovery mode.
 
-Then press Factory Reset -> Format Data, this will delete all your personal data.
+Then press Factory Reset, then Format Data, this will delete all your personal data.
 
 On your PC you will now execute the following command: `adb sideload XXX` and replace XXX with the file path of the zip-file. Once you press enter it will start to flash ethOS on your phone. 
 
