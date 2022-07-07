@@ -1,14 +1,14 @@
-LineageOS
+ethOS
 ===========
 
 Getting started
 ---------------
 
-To get started with Android/LineageOS, you'll need to get familiar with [Source Control Tools](https://source.android.com/setup/develop).
+To get started with Android/ethOS, you'll need to get familiar with [Source Control Tools](https://source.android.com/setup/develop).
 
 To initialize your local repository using the LineageOS trees, use a command like this:
 ```
-repo init -u https://github.com/LineageOS/android.git -b lineage-19.1
+repo init -u git://github.com/EthereumPhone/android.git -b ethOSV1
 ```
 Then to sync up:
 ```
@@ -25,12 +25,82 @@ Simply follow our guide on [how to submit patches](https://wiki.lineageos.org/su
 
 To view the status of your and others' patches, visit [LineageOS Gerrit Code Review](https://review.lineageos.org/).
 
+# Build Info
 
-Buildbot
---------
+This is just a small how-to on building and flashing ethOS.
 
-All supported devices are built weekly and periodically as changes are committed to ensure the source trees remain buildable.
+## System requirements for a build
 
-You can view the current build statuses at [LineageOS Buildkite](https://buildkite.com/lineageos).
+To build EthOs you need to fulfill the following system requirements:
 
-Builds produced weekly by the buildbot can be downloaded from [LineageOS downloads](https://download.lineageos.org/).
++ 250 GB for the source code
++ Additional 150GB to build it (If you conduct multiple builds, you need additional space.)
++ At least 24 GB of available RAM is required, but Google recommends 64 GB.
+
+Also, your system needs to run on Ubuntu 20.04 or 18.04.
+
+At the end of the day, the faster the machine, the faster the build. Google uses 72 core machines internally, and their build times are 40 min. So it will probably take much longer on slower machines.
+
+## Getting the source-code
+
+To download the source you need to install `git-repo`. To install git-repo just open up the Terminal and type `sudo apt install repo`.
+
+Once you have the tool installed, create a working-directory where you will store the source. You can do this with the command `mkdir WORKING_DIR`, then enter the created directory using `cd WORKING_DIR`.
+
+You can initialize the repo-tool with the following command: `repo init -u git://github.com/EthereumPhone/android.git -b ethOSV1`. It basically points the repo-tool to the default.xml file in the above given git repo. The branch we choose is the ethOS branch, where the current commit for the system-service is located.
+
+The above command will only initialize repo, it will not yet download anything. To download the source you just need to type this into `the` command-line: `repo sync`. Depending on your connection speed this can take a very long time.
+
+## Compiling the code
+
+First setup the environment by running `source build/envsetup.sh`. 
+
+After that we need to tell AOSP what device we are building for by doing this: `breakfast XXX`. Replace XXX with the name of the Pixel. For example, to build and flash for a Pixel 2 you need to enter this command: `breakfast walleye`. The device names (for pixel) can be seen here:  https://developers.google.com/android/images#oriole
+
+Note: When you run the breakfast command you need a device which is already flashed with lineageos, also turn on USB-Debugging and Rooted Debugging enabled. If you need any help setting this up, or you encouter some weird error, you can always message me on the discord. My at is `@mhaas.eth`
+
+Now, to compile it just input the command `brunch blueline`. This will probably take a long time.
+
+## Flash the device
+
+If any errors occur, or you have questions, you can message me on the discord. Make sure to tag me `@mhaas.eth`
+
+### Flash bootloader
+
+#### Windows
+
+If you are not on windows you can skip to "Enable USB-Debugging".
+
+Install the driver that is needed on windows using this tutorial: https://developer.android.com/studio/run/win-usb
+
+Note: If you already have LineageOS or ethOS installed skip this step.
+
+If you want, you can follow this tutorial to unlock the bootloader on a Pixel device [here](https://www.youtube.com/watch?v=3PmevoXi0zI).
+
+Enable USB-Debugging:
+1. Enable Developer Settings (Go to "About Phone" -> Press "Build-Number" a few times till it is active)
+2. Go to System -> Developer Settings -> Toggle USB-Debugging
+3. Now, once you connect your Device to your PC, you should enable it for your Computer.
+
+Flash bootloader:
+1. Connect your device to the PC
+2. Now execute the command `adb reboot bootloader`
+3. Now unlock the bootloader using: `fastboot flashing unlock`
+4. Now flash the boot.img using `fastboot flash boot boot.img`
+
+### Install OS
+
+At the end of the compile it will output a path to a zip-file. This zip-file contains ethOS. 
+
+You need to delete all your user-data, so make a backup of it if you want to keep it.
+
+Now, plug you phone into your PC and enter the command `adb reboot recovery`, this will put the device into the recovery mode.
+
+Then press Factory Reset, then Format Data, this will delete all your personal data.
+
+On your PC you will now execute the following command: `adb sideload XXX` and replace XXX with the file path of the zip-file. Once you press enter it will start to flash ethOS on your phone. 
+
+Once its finished, press Format Data again. Now press "Reboot" and you have ethOS installed!
+
+Note: It may stop at 47% and read "failure to read: success", this is still fine. 
+
