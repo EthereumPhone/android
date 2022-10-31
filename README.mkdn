@@ -8,7 +8,7 @@ To get started with Android/ethOS, you'll need to get familiar with [Source Cont
 
 To initialize your local repository using the LineageOS trees, use a command like this:
 ```
-repo init -u git://github.com/EthereumPhone/android.git -b ethOSV1
+repo init -u git://github.com/EthereumPhone/android.git -b ethOSV1.1
 ```
 Then to sync up:
 ```
@@ -47,7 +47,7 @@ To download the source you need to install `git-repo`. To install git-repo just 
 
 Once you have the tool installed, create a working-directory where you will store the source. You can do this with the command `mkdir WORKING_DIR`, then enter the created directory using `cd WORKING_DIR`.
 
-You can initialize the repo-tool with the following command: `repo init -u git://github.com/EthereumPhone/android.git -b ethOSV1`. It basically points the repo-tool to the default.xml file in the above given git repo. The branch we choose is the ethOS branch, where the current commit for the system-service is located.
+You can initialize the repo-tool with the following command: `repo init -u git://github.com/EthereumPhone/android.git -b ethOSV1.1`. It basically points the repo-tool to the default.xml file in the above given git repo. The branch we choose is the ethOS branch, where the current commit for the system-service is located.
 
 The above command will only initialize repo, it will not yet download anything. To download the source you just need to type this into `the` command-line: `repo sync`. Depending on your connection speed this can take a very long time.
 
