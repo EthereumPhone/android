@@ -104,3 +104,14 @@ Once its finished, press Format Data again. Now press "Reboot" and you have ethO
 
 Note: It may stop at 47% and read "failure to read: success", this is still fine. 
 
+## How to use in Emulator
+
+First download the zip file with the image from here: https://storage.googleapis.com/ethos_binaries/lineage-eng.markus-linux-x86-img.zip
+
+You can add it to Android Studio by going into the folder where your Android SDK is located and then extract the folder in the `system-images` folder there. Once that is done you can create a new device in android studio with ethOS. It should be marked under "LineageOS".
+
+You need to complete one last thing to make the system-wallet work on the ethOS simulator.
+
+With the Phone open, first type `adb shell settings put global development_settings_enabled 1`. Then go into the Settings under System-> Developer Settings and enable "Root Debugging".
+
+Once you enabled that you just need to type `adb shell setenforce 0`. Then the system wallet should work, you can test it with the WalletSDK: https://github.com/EthereumPhone/WalletSDK
